@@ -14,7 +14,8 @@ A proof of concept for an alternative Ethereum function dispatcher that uses mat
 
 ## How It Works
 
-![image](https://github.com/user-attachments/assets/9924a697-6013-421a-9e9a-ea05452cbc54)
+![image](https://github.com/user-attachments/assets/1813463f-fd94-4ce2-9bd8-2f8043872f94)
+
 
 When you call a function in an EVM contract, you provide a 4-byte signature (selector). The dispatcher maps these selectors to unique bytes using a mathematical formula:
 
