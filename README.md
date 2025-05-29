@@ -10,13 +10,15 @@ A proof of concept for an alternative Ethereum smart contract function dispatche
 
 ## How It Works
 
-From a given set of function ids finds a simple _hashing_ function that maps each funcid into a different u8. The use the following ~600 bytes to hold little basic block that will finally jump into the final real function initial basic block. It uses 700 bytes for the dispatch code 😂. But then only 55? gas to reach the function.  
+From a given set of function ids it finds a simple _hashing_ function that maps each funcid into a different u8. Then use the next ~600 bytes to hold a bunch of little basic blocks. Each bb will jump into the final real function initial basic block. It uses 700 bytes for the dispatch code 😂. But then only 55? gas to reach the function from pc 0.  
 
+Get the byte:
 ```
 result_byte = ((selector * magic_number_q) >> shift_amount) & 0xFF
 ```
 
 Then is uses that byte multiplied by 6 to jump to a basic block that will jump to the actuall basic block. This will fill all the blockchain.
+Funcids that end up in an unused byte will/could jump into an invalid.
 
 ### Bytecode Structure
 
