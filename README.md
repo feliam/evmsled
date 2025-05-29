@@ -1,24 +1,24 @@
-Following on https://github.com/montyly/vyper_hash/tree/main (and https://blog.vyperlang.org/posts/selector-tables/)
+## Following on:
+
+- https://github.com/montyly/vyper_hash/tree/main/
+
+- https://blog.vyperlang.org/posts/selector-tables/
 
 100% of the rust code was vibe coded, so this requires further investigation :)
 
 ![image](https://github.com/user-attachments/assets/31f18053-0320-4500-a3c4-31d4f853e8e4)
 
-# EVM Function Dispatcher Optimization (Proof of Concept)
+# EVM Function Dispatcher (Proof of Concept)
 
-A proof of concept for an alternative Ethereum smart contract function dispatcher that uses mathematical operations instead of multiple comparisons. This is an experimental approach to function dispatching. :)
+A proof of concept for an alternative Ethereum function dispatcher that uses mathematical operations instead of multiple comparisons. This is an experimental approach to function dispatching.
 
 ## How It Works
 
-From a given set of function ids it finds a simple _hashing_ function that maps each funcid into a different u8. Then use the next ~600 bytes to hold a bunch of little basic blocks. Each bb will jump into the final real function initial basic block. It uses 700 bytes for the dispatch code 😂. But then only 55? gas to reach the function from pc 0.  
+When you call a function in an EVM contract, you provide a 4-byte signature (selector). The dispatcher maps these selectors to unique bytes using a mathematical formula:
 
-Get the byte:
 ```
 result_byte = ((selector * magic_number_q) >> shift_amount) & 0xFF
 ```
-
-Then is uses that byte multiplied by 6 to jump to a basic block that will jump to the actuall basic block. This will fill all the blockchain.
-Funcids that end up in an unused byte will/could jump into an invalid.
 
 ### Bytecode Structure
 
