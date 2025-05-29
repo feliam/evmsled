@@ -2,7 +2,8 @@ Following on https://github.com/montyly/vyper_hash/tree/main (and https://blog.v
 
 100% of the rust code was vibe coded, so this requires further investigation :)
 
-i
+![image](https://github.com/user-attachments/assets/31f18053-0320-4500-a3c4-31d4f853e8e4)
+
 # EVM Function Dispatcher Optimization (Proof of Concept)
 
 A proof of concept for an alternative Ethereum smart contract function dispatcher that uses mathematical operations instead of multiple comparisons. This is an experimental approach to function dispatching. :)
