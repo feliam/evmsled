@@ -2,17 +2,20 @@ Following on https://github.com/montyly/vyper_hash/tree/main (and https://blog.v
 
 100% of the rust code was vibe coded, so this requires further investigation :)
 
+i
 # EVM Function Dispatcher Optimization (Proof of Concept)
 
-A proof of concept for an alternative Ethereum smart contract function dispatcher that uses mathematical operations instead of multiple comparisons. This is an experimental approach to function dispatching.
+A proof of concept for an alternative Ethereum smart contract function dispatcher that uses mathematical operations instead of multiple comparisons. This is an experimental approach to function dispatching. :)
 
 ## How It Works
 
-The dispatcher uses a mathematical approach to map function selectors to unique bytes:
+From a given set of function ids finds a simple _hashing_ function that maps each funcid into a different u8. The use the following ~600 bytes to hold little basic block that will finally jump into the final real function initial basic block. It uses 700 bytes for the dispatch code 😂. But then only 55? gas to reach the function.  
 
 ```
 result_byte = ((selector * magic_number_q) >> shift_amount) & 0xFF
 ```
+
+Then is uses that byte multiplied by 6 to jump to a basic block that will jump to the actuall basic block. This will fill all the blockchain.
 
 ### Bytecode Structure
 
