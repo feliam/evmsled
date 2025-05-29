@@ -224,10 +224,9 @@ fn main() {
             // Print NOPs and dispatchers at their correct offsets
             let mut current_offset = 78;
             for (offset, result_byte, selector, addr) in dispatcher_offsets {
-                // Print NOPs for the gap
-                while current_offset < offset {
-                    println!("{:3}: NOP", current_offset);
-                    current_offset += 1;
+                // Skip printing NOPs, just show the gap in offset
+                if current_offset < offset {
+                    println!("// Gap from offset {} to {}", current_offset, offset);
                 }
                 
                 // Print the dispatcher
